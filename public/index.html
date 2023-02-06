@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Default Webpage Title</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous" defer=""></script>
+        <script src="app.js" defer=""></script>
+    </head>
+    <body class="bg-dark">
+        <!-- Nav Bar -->
+        <nav class="navbar navbar-expand-lg bg-black">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white">Movie Search</a>
+                <form class="d-flex" role="search">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text bg-dark-subtle border border-0">Search for:</span>
+                        <select class="form-select bg-dark-subtle border border-0" aria-label="Search selection" id="trendType">
+                            <option selected value="all">Choose search type</option>
+                            <option value="all">All</option>
+                            <option value="movie">Movie</option>
+                            <option value="person">Person</option>
+                            <option value="tv">TV</option>
+                        </select>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text bg-dark-subtle border border-0">Trending:</span>
+                        <select class="form-select bg-dark-subtle border border-0" aria-label="Search selection" id="trendTime">
+                            <option selected value="day">Choose search time</option>
+                            <option value="day">Today</option>
+                            <option value="week">This Week</option>
+                        </select>
+                    </div>
+                    <!--
+                    <div class="input-group-text bg-dark-subtle border border-0">
+                        <span>Include Mature?</span>
+                        <input class="form-check-input border border-dark" type="checkbox" value="1" id="includeAdult" required/>
+                    </div>
+                    -->
+                    <button class="btn btn-outline-secondary" id="trendingSearchBtn"type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+
+        <!-- Body Content -->
+        <main>
+            <section class="container-fluid">
+                <h3 class="text-white">Search Results:</h3>
+                <div id="results" class="d-flex flex-wrap">
+                    
+                </div>
+            </section>
+        </main>
+    </body>
+    <footer>
+
+    </footer>
+</html>
