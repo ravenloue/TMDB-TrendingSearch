@@ -62,34 +62,34 @@ trendingSearchBtn.addEventListener('click', evt => {
                 
                 case "person":
                     personPath = posterPath+item.profile_path;
-                    resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3">
-                                                    <div class="card-header bg-black border border-secondary">
+                    resultsArea.innerHTML += `<div class="container card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">
+                                                    <div class="card-header bg-black border border-secondary ">
                                                         <h4 class="text-white">${item.name}</h4>
                                                     </div>
                                                     <div class="card-body bg-black border border-secondary">
-                                                        <image src="${personPath}" class="mx-4 my-2" />
+                                                        <image src="${personPath}" />
                                                     </div>
                                               </div>`;
                     break;
                 case "movie":
                     itemPostPath = posterPath+item.poster_path;
-                    resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3">
+                    resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">
                                                 <div class="card-header bg-black border border-secondary">
                                                     <h4 class="text-white">${item.title}</h4>
                                                 </div>
                                                 <div class="card-body bg-black border border-secondary ">
-                                                    <image src="${itemPostPath}" class="mx-4 my-2" />
+                                                    <image src="${itemPostPath}" />
                                                 </div>
                                               </div>`;
                     break;
                 case "tv":
                     itemPostPath = posterPath+item.poster_path;
-                    resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3">
+                    resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">
                                                 <div class="card-header bg-black border border-secondary">
                                                     <h4 class="text-white">${item.name}</h4>
                                                 </div>
                                                 <div class="card-body bg-black border border-secondary">
-                                                    <image src="${itemPostPath}" class="mx-4 my-2" />
+                                                    <image src="${itemPostPath}"/>
                                                 </div>
                                               </div>`;
                 
