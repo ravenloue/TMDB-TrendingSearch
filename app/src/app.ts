@@ -1,30 +1,24 @@
-// Temporary class def
-
-
 // API information
 const apiKey = '4f7cabe80884cea2dfd539471ec51096';
 const apiURLstart = 'https://api.themoviedb.org/3/';
 
+/* Using the API key and url to gather information for determining the path
+ * which will be used to pull images from the movie database
+ */
 const configUrl = apiURLstart+'configuration?api_key='+apiKey;
-
 var secBaseUrl: string;
 var posterSize: string;
 var posterPath: string;
 
 fetch(configUrl)
     .then( response => response.json() )
-    .then((results)=>{
+    .then( results =>{
         
         secBaseUrl  = results.images.secure_base_url;
         posterSize  = results.images.poster_sizes[2];
     })
-    .then((evt) => {
-        // Poster Path data
-        posterPath = secBaseUrl+posterSize;
-    })
-
-
-
+    // Concatenating the data to form the path
+    .then(evt => posterPath = secBaseUrl+posterSize);
 
 const trendingSearchBtn = document.getElementById("trendingSearchBtn") as HTMLButtonElement;
 const trendType = document.getElementById("trendType") as HTMLSelectElement;
@@ -32,27 +26,29 @@ const trendTime = document.getElementById("trendTime") as HTMLSelectElement;
 //const includeAdult = document.getElementById("includeAdult") as HTMLInputElement;
 const resultsArea = document.getElementById('results') as HTMLDivElement;
 
-trendingSearchBtn.addEventListener('click', (evt) => {
-    evt.preventDefault(); //prevents button click from refreshing the page
+trendingSearchBtn.addEventListener('click', evt => {
 
-    resultsArea.innerHTML =``;    
+    evt.preventDefault(); // Prevents button click from refreshing the page
 
-    // Assigns search type and time settings 
+    resultsArea.innerHTML =``; // Clears out the previous search results
+
+    // Retrieves the information from the form and creates a URL for the fetch function
     let type = trendType.value;
     let time = trendTime.value;
-
-    // Strings that combine all of the above information together
     const apiPrefix = 'trending/'+type+'/'+time+'?';
     const searchUrl = apiURLstart+apiPrefix+'api_key='+apiKey;
 
-    // Represents user selection for including mature rated items
+    /* Represents user selection for including mature rated items
+       Doesn't work right now. Look into figuring it out later.
+       Most results dont seem to have adult rating anyway */
     //const mature:boolean = !(includeAdult.validity.valueMissing);
 
+    // remove later after i've finished building the classes for the json object
     console.log(searchUrl);
     // Fetching information and rendering it to the page
     fetch(searchUrl)
         .then( response => response.json() )
-        .then((results) => {
+        .then( results => {
 
             results.results.forEach((item:object) => {
                 //console.log(item);
