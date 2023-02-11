@@ -1,4 +1,3 @@
-"use strict";
 // API information
 const apiKey = '4f7cabe80884cea2dfd539471ec51096';
 const apiURLstart = 'https://api.themoviedb.org/3/';
@@ -39,12 +38,13 @@ trendingSearchBtn.addEventListener('click', evt => {
     // Fetching information and rendering it to the page
     fetch(searchUrl)
         .then(response => response.json())
-        .then(results => {
-        results.results.forEach((item) => {
-            //console.log(item);
-            if (item.media_type === "person") {
-                let personPath = posterPath + item.profile_path;
-                resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3">
+        .then((results) => {
+        results.results.forEach(item => {
+            let personPath, itemPostPath;
+            switch (item.media_type) {
+                case "person":
+                    personPath = posterPath + item.profile_path;
+                    resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3">
                                                     <div class="card-header bg-black border border-secondary">
                                                         <h4 class="text-white">${item.name}</h4>
                                                     </div>
@@ -52,10 +52,10 @@ trendingSearchBtn.addEventListener('click', evt => {
                                                         <image src="${personPath}" class="mx-4 my-2" />
                                                     </div>
                                               </div>`;
-            }
-            else if (item.name === undefined) {
-                let itemPostPath = posterPath + item.poster_path;
-                resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3">
+                    break;
+                case "movie":
+                    itemPostPath = posterPath + item.poster_path;
+                    resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3">
                                                 <div class="card-header bg-black border border-secondary">
                                                     <h4 class="text-white">${item.title}</h4>
                                                 </div>
@@ -63,10 +63,10 @@ trendingSearchBtn.addEventListener('click', evt => {
                                                     <image src="${itemPostPath}" class="mx-4 my-2" />
                                                 </div>
                                               </div>`;
-            }
-            else {
-                let itemPostPath = posterPath + item.poster_path;
-                resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3">
+                    break;
+                case "tv":
+                    itemPostPath = posterPath + item.poster_path;
+                    resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3">
                                                 <div class="card-header bg-black border border-secondary">
                                                     <h4 class="text-white">${item.name}</h4>
                                                 </div>
@@ -74,7 +74,10 @@ trendingSearchBtn.addEventListener('click', evt => {
                                                     <image src="${itemPostPath}" class="mx-4 my-2" />
                                                 </div>
                                               </div>`;
+                default:
+                    return;
             }
         });
     });
 });
+export {};
