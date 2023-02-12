@@ -1,5 +1,5 @@
 # TMDB-TrendingSearch
- A mobile-friendly movie database searcher that retrieves daily or weekly trends for movies, tv shows and people involved in the industry.
+ A mobile-friendly webpage that utilizes TMDB's API to retrieve daily or weekly trends for movies, tv shows and people involved in the industry.
 
 ## Table of contents
 
@@ -23,10 +23,19 @@ TMDB-TrendingSearch allows users to search for the weekly or daily trends in mov
 
 Users should be able to:
 
+- Filter trending between:
+ - Today
+ - This Week
+- Search for:
+ - Movies
+ - TV Shows
+ - People
+ - ALL
+
 
 ### Screenshot
 
-![]()
+![Test](./screencaps/SS-1.png)
 
 
 ## My process
