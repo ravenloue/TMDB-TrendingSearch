@@ -47,7 +47,7 @@ trendingSearchBtn.addEventListener('click', evt => {
             
             results.results.forEach( item => {
 
-                let path:string, itemName:string, nameTrunc:string = '', cardOpener:string, cardCloser:string;
+                let path:string, itemName:string, nameTrunc:string = '', cardOpener:string, cardCloser:string, clickStart:string, clickEnd:string;
 
                 // Ternary conditionals to simplifiy item properties and reduce repetitious code
                 itemName = (item.name === undefined) ? item.title : item.name;
@@ -58,10 +58,12 @@ trendingSearchBtn.addEventListener('click', evt => {
                              '<h4 class="text-white card-header bg-black border border-secondary text-center" id="'+ item.id +'" title="' + itemName + '">';
                 cardCloser = '</h4><image class="card-img-bottom bg-black border border-secondary" src="' + path +
                              '" alt="Promotional Image of ' + itemName + '"/></div>';
+                clickStart = '<a onclick="alert('+itemName+')">';
+                clickEnd   = '</a>'
 
                 if(itemName.length > 14){ // Truncate the name if it is too long to maintain good visibility
                     nameTrunc = itemName.substring(0,10)+'...';
-                    resultsArea.innerHTML +=`${cardOpener} <a onclick="alert('`+itemName+`');">`+nameTrunc+`</a> ${cardCloser}`;
+                    resultsArea.innerHTML +=`${cardOpener}${clickStart}`+nameTrunc+`${clickEnd}${cardCloser}`;
                 }else {
                     resultsArea.innerHTML +=`${cardOpener}`+itemName+`${cardCloser}`;
                 }
