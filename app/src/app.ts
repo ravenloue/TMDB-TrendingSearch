@@ -41,13 +41,6 @@ trendingSearchBtn.addEventListener('click', evt => {
     const apiPrefix = 'trending/'+type+'/'+time+'?';
     const searchUrl = apiURLstart+apiPrefix+'api_key='+apiKey;
 
-    /* Represents user selection for including mature rated items
-       Doesn't work right now. Look into figuring it out later.
-       Most results dont seem to have adult rating anyway */
-    //const mature:boolean = !(includeAdult.validity.valueMissing);
-
-    // remove later after i've finished building the classes for the json object
-    console.log(searchUrl);
     // Fetching information and rendering it to the page
     fetch(searchUrl)
         .then( response => response.json() )
@@ -56,73 +49,25 @@ trendingSearchBtn.addEventListener('click', evt => {
             
             results.results.forEach( item => {
 
-                let personPath, itemPostPath;
+                let path:string, itemName:string, nameTrunc:string = '', cardOpener:string, cardCloser:string;
 
-                switch(item.media_type){
-                
-                case "person":
-                    personPath = posterPath+item.profile_path;
-                    if(item.name.length > 14){
-                        item.name_trunc = item.name.substring(0,10)+"..."
-                        resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">
-                                                  <h4 class="text-white card-header bg-black border 
-                                                             border-secondary text-center" title="${item.name}">${item.name_trunc}</h4>
-                                                  <image class="card-img-bottom bg-black border border-secondary" 
-                                                         src="${personPath}" alt="Headshot of ${item.name}"/>
-                                                  </div>`;                    
-                    }else{
-                    resultsArea.innerHTML += `<div class="container card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">
-                                                    <h4 class="text-white card-header bg-black border 
-                                                               border-secondary text-center">${item.name}</h4>                                                    
-                                                    <image class="card-img-bottom bg-black border border-secondary" 
-                                                           src="${personPath}" alt="Headshot of ${item.name}"/>
-                                              </div>`;
-                    }
-                    break;
-                case "movie":
-                    itemPostPath = posterPath+item.poster_path;
-                    if(item.title.length > 14){
-                        item.name_trunc = item.title.substring(0,10)+"..."
-                        itemPostPath = posterPath+item.poster_path;
-                        resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">                                                
-                                                  <h4 class="text-white card-header bg-black border 
-                                                      border-secondary text-center" title="${item.title}">${item.name_trunc}</h4>
-                                                  <image class="card-img-bottom bg-black border border-secondary" 
-                                                         src="${itemPostPath}" alt="Promotional poster of ${item.name}"/>
-                                                  </div>`;
-                    
-                    }else{
-                    resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">                                                
-                                                <h4 class="text-white card-header bg-black border 
-                                                    border-secondary text-center">${item.title}</h4>
-                                                <image class="card-img-bottom bg-black border border-secondary" 
-                                                       src="${itemPostPath}" alt="Promotional poster of ${item.name}"/>
-                                              </div>`;
-                    }
-                    break;
-                case "tv":
-                    itemPostPath = posterPath+item.poster_path;
-                    if(item.name.length > 14){
-                        item.name_trunc = item.name.substring(0,10)+"..."
-                        resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">
-                                                  <h4 class="text-white card-header bg-black border 
-                                                             border-secondary text-center" title="${item.name}">${item.name_trunc}</h4>
-                                                  <image class="card-img-bottom bg-black border border-secondary" 
-                                                         src="${itemPostPath}" alt="Promotional poster of ${item.name}"/>
-                                                  </div>`;
-                    }else{                    
-                    resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">
-                                                <h4 class="text-white card-header bg-black border 
-                                                           border-secondary text-center">${item.name}</h4>
-                                                <image class="card-img-bottom bg-black border border-secondary" 
-                                                       src="${itemPostPath}" alt="Promotional poster of ${item.name}"/>
-                                              </div>`;
-                    }
-                
-                default:
-                    return;
+                // Ternary conditionals to simplifiy item properties and reduce repetitious code
+                itemName = (item.name === undefined) ? item.title : item.name;
+                path = (item.media_type === "person") ? posterPath+item.profile_path : posterPath+item.poster_path ;
+
+                // Generating Strings for the cards
+                cardOpener = '<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">' +
+                             '<h4 class="text-white card-header bg-black border border-secondary text-center" title="' + itemName + '">';
+                cardCloser = '</h4><image class="card-img-bottom bg-black border border-secondary" src="' + path +
+                             '" alt="Promotional Image of ' + itemName + '"/></div>';
+
+                if(itemName.length > 14){ // Truncate the name if it is too long to maintain good visibility
+                    nameTrunc = itemName.substring(0,10)+"...";
+                    resultsArea.innerHTML +=`${cardOpener}`+nameTrunc+`${cardCloser}`;
+                }else {
+                    resultsArea.innerHTML +=`${cardOpener}`+itemName+`${cardCloser}`;
                 }
             });
-        })
+        }) // end of .then for fetch call
 
 })
