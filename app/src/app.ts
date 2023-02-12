@@ -61,37 +61,65 @@ trendingSearchBtn.addEventListener('click', evt => {
                 switch(item.media_type){
                 
                 case "person":
+                    if(item.name.length > 14){
+                        item.name_trunc = item.name.substring(0,10)+"..."
+                        itemPostPath = posterPath+item.poster_path;
+                        resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">
+                                                  <h4 class="text-white card-header bg-black border 
+                                                             border-secondary text-center" title="${item.name}">${item.name_trunc}</h4>
+                                                  <image class="card-img-bottom bg-black border border-secondary" 
+                                                         src="${itemPostPath}" alt="Headshot of ${item.name}"/>
+                                                  </div>`;                    
+                    }else{
                     personPath = posterPath+item.profile_path;
                     resultsArea.innerHTML += `<div class="container card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">
-                                                    <div class="card-header bg-black border border-secondary ">
-                                                        <h4 class="text-white">${item.name}</h4>
-                                                    </div>
-                                                    <div class="card-body bg-black border border-secondary">
-                                                        <image src="${personPath}" />
-                                                    </div>
+                                                    <h4 class="text-white card-header bg-black border 
+                                                               border-secondary text-center">${item.name}</h4>                                                    
+                                                    <image class="card-img-bottom bg-black border border-secondary" 
+                                                           src="${personPath}" alt="Headshot of ${item.name}"/>
                                               </div>`;
+                    }
                     break;
                 case "movie":
+                    if(item.title.length > 14){
+                        item.name_trunc = item.title.substring(0,10)+"..."
+                        itemPostPath = posterPath+item.poster_path;
+                        resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">                                                
+                                                  <h4 class="text-white card-header bg-black border 
+                                                      border-secondary text-center" title="${item.title}">${item.name_trunc}</h4>
+                                                  <image class="card-img-bottom bg-black border border-secondary" 
+                                                         src="${itemPostPath}" alt="Promotional poster of ${item.name}"/>
+                                                  </div>`;
+                    
+                    }else{
                     itemPostPath = posterPath+item.poster_path;
-                    resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">
-                                                <div class="card-header bg-black border border-secondary">
-                                                    <h4 class="text-white">${item.title}</h4>
-                                                </div>
-                                                <div class="card-body bg-black border border-secondary ">
-                                                    <image src="${itemPostPath}" />
-                                                </div>
+                    resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">                                                
+                                                <h4 class="text-white card-header bg-black border 
+                                                    border-secondary text-center">${item.title}</h4>
+                                                <image class="card-img-bottom bg-black border border-secondary" 
+                                                       src="${itemPostPath}" alt="Promotional poster of ${item.name}"/>
                                               </div>`;
+                    }
                     break;
                 case "tv":
+                    if(item.name.length > 14){
+                        item.name_trunc = item.name.substring(0,10)+"..."
+                        itemPostPath = posterPath+item.poster_path;
+                        resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">
+                                                  <h4 class="text-white card-header bg-black border 
+                                                             border-secondary text-center" title="${item.name}">${item.name_trunc}</h4>
+                                                  <image class="card-img-bottom bg-black border border-secondary" 
+                                                         src="${itemPostPath}" alt="Promotional poster of ${item.name}"/>
+                                                  </div>`;
+                    }else{
                     itemPostPath = posterPath+item.poster_path;
                     resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">
-                                                <div class="card-header bg-black border border-secondary">
-                                                    <h4 class="text-white">${item.name}</h4>
-                                                </div>
-                                                <div class="card-body bg-black border border-secondary">
-                                                    <image src="${itemPostPath}"/>
-                                                </div>
+                                                <h4 class="text-white card-header bg-black border 
+                                                           border-secondary text-center">${item.name}</h4>
+                                                <image class="card-img-bottom bg-black border border-secondary" 
+                                                       src="${itemPostPath}" alt="Promotional poster of ${item.name}"/>
                                               </div>`;
+                    }
                 
                 default:
                     return;
