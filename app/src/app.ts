@@ -52,75 +52,38 @@ trendingSearchBtn.addEventListener('click', evt => {
     fetch(searchUrl)
         .then( response => response.json() )
         .then( (results: MovieDBObject) => {
-
             
             results.results.forEach( item => {
 
-                let personPath, itemPostPath;
+                let path:string, itemName:string, nameTrunc:string = '', cardOpener:string, cardCloser:string;
+
+                // Simplify the naming structure of the items coming in
+                if(item.name === undefined){
+                    itemName = item.title;
+                }else{
+                    itemName = item.name;
+                }
 
                 switch(item.media_type){
+                    case "person":
+                        path = posterPath+item.profile_path;
+                        break;
                 
-                case "person":
-                    personPath = posterPath+item.profile_path;
-                    if(item.name.length > 14){
-                        item.name_trunc = item.name.substring(0,10)+"..."
-                        resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">
-                                                  <h4 class="text-white card-header bg-black border 
-                                                             border-secondary text-center" title="${item.name}">${item.name_trunc}</h4>
-                                                  <image class="card-img-bottom bg-black border border-secondary" 
-                                                         src="${personPath}" alt="Headshot of ${item.name}"/>
-                                                  </div>`;                    
-                    }else{
-                    resultsArea.innerHTML += `<div class="container card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">
-                                                    <h4 class="text-white card-header bg-black border 
-                                                               border-secondary text-center">${item.name}</h4>                                                    
-                                                    <image class="card-img-bottom bg-black border border-secondary" 
-                                                           src="${personPath}" alt="Headshot of ${item.name}"/>
-                                              </div>`;
-                    }
-                    break;
-                case "movie":
-                    itemPostPath = posterPath+item.poster_path;
-                    if(item.title.length > 14){
-                        item.name_trunc = item.title.substring(0,10)+"..."
-                        itemPostPath = posterPath+item.poster_path;
-                        resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">                                                
-                                                  <h4 class="text-white card-header bg-black border 
-                                                      border-secondary text-center" title="${item.title}">${item.name_trunc}</h4>
-                                                  <image class="card-img-bottom bg-black border border-secondary" 
-                                                         src="${itemPostPath}" alt="Promotional poster of ${item.name}"/>
-                                                  </div>`;
-                    
-                    }else{
-                    resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">                                                
-                                                <h4 class="text-white card-header bg-black border 
-                                                    border-secondary text-center">${item.title}</h4>
-                                                <image class="card-img-bottom bg-black border border-secondary" 
-                                                       src="${itemPostPath}" alt="Promotional poster of ${item.name}"/>
-                                              </div>`;
-                    }
-                    break;
-                case "tv":
-                    itemPostPath = posterPath+item.poster_path;
-                    if(item.name.length > 14){
-                        item.name_trunc = item.name.substring(0,10)+"..."
-                        resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">
-                                                  <h4 class="text-white card-header bg-black border 
-                                                             border-secondary text-center" title="${item.name}">${item.name_trunc}</h4>
-                                                  <image class="card-img-bottom bg-black border border-secondary" 
-                                                         src="${itemPostPath}" alt="Promotional poster of ${item.name}"/>
-                                                  </div>`;
-                    }else{                    
-                    resultsArea.innerHTML += `<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">
-                                                <h4 class="text-white card-header bg-black border 
-                                                           border-secondary text-center">${item.name}</h4>
-                                                <image class="card-img-bottom bg-black border border-secondary" 
-                                                       src="${itemPostPath}" alt="Promotional poster of ${item.name}"/>
-                                              </div>`;
-                    }
-                
-                default:
-                    return;
+                    default: // Movie or TV Show option
+                        path = posterPath+item.poster_path;
+                }
+
+                // Generating Strings for the cards
+                cardOpener = '<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">' +
+                             '<h4 class="text-white card-header bg-black border border-secondary text-center" title="' + itemName + '">';
+                cardCloser = '</h4><image class="card-img-bottom bg-black border border-secondary" src="' + path +
+                             '" alt="Promotional Image of ' + itemName + '"/></div>';
+
+                if(itemName.length > 14){ // Truncate the name if it is too long to maintain good visibility
+                    nameTrunc = itemName.substring(0,10)+"...";
+                    resultsArea.innerHTML +=`${cardOpener}`+nameTrunc+`${cardCloser}`;
+                }else {
+                    resultsArea.innerHTML +=`${cardOpener}`+itemName+`${cardCloser}`;
                 }
             });
         })
