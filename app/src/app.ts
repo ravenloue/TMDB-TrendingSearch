@@ -45,7 +45,6 @@ trendingSearchBtn.addEventListener('click', evt => {
     fetch(searchUrl)
         .then( response => response.json() )
         .then( (results: MovieDBObject) => {
-
             
             results.results.forEach( item => {
 

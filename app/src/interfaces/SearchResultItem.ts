@@ -8,5 +8,5 @@ export interface SearchResultItem extends Movie, TVShow, Person {
     id: number;
     media_type: string;
     popularity: number;
-    name_trunc: string;
+    
 }
