@@ -26,7 +26,6 @@ fetch(configUrl)
 const trendingSearchBtn = document.getElementById("trendingSearchBtn") as HTMLButtonElement;
 const trendType = document.getElementById("trendType") as HTMLSelectElement;
 const trendTime = document.getElementById("trendTime") as HTMLSelectElement;
-//const includeAdult = document.getElementById("includeAdult") as HTMLInputElement;
 const resultsArea = document.getElementById('results') as HTMLDivElement;
 
 trendingSearchBtn.addEventListener('click', evt => {
@@ -55,18 +54,18 @@ trendingSearchBtn.addEventListener('click', evt => {
                 path = (item.media_type === "person") ? posterPath+item.profile_path : posterPath+item.poster_path ;
 
                 // Generating Strings for the cards
-                cardOpener = '<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">' +
-                             '<h4 class="text-white card-header bg-black border border-secondary text-center" title="' + itemName + '">';
+                cardOpener = '<article class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">' +
+                             '<h4 class="text-white card-header bg-black border border-secondary text-center" id="'+ item.id +'" title="' + itemName + '">';
                 cardCloser = '</h4><image class="card-img-bottom bg-black border border-secondary" src="' + path +
-                             '" alt="Promotional Image of ' + itemName + '"/></div>';
+                             '" alt="Promotional Image of ' + itemName + '"/></article>';
 
                 if(itemName.length > 14){ // Truncate the name if it is too long to maintain good visibility
-                    nameTrunc = itemName.substring(0,10)+"...";
-                    resultsArea.innerHTML +=`${cardOpener}`+nameTrunc+`${cardCloser}`;
+                    nameTrunc = itemName.substring(0,10)+'...';
+                    resultsArea.innerHTML +=`${cardOpener} <a onclick="alert('`+itemName+`');">`+nameTrunc+`</a> ${cardCloser}`;
                 }else {
                     resultsArea.innerHTML +=`${cardOpener}`+itemName+`${cardCloser}`;
                 }
             });
-        }) // end of .then for fetch call
+        }) // End of Fetch calls
 
-})
+}) // end of Trending Search functionality
