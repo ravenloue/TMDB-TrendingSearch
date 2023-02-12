@@ -54,10 +54,10 @@ trendingSearchBtn.addEventListener('click', evt => {
                 path = (item.media_type === "person") ? posterPath+item.profile_path : posterPath+item.poster_path ;
 
                 // Generating Strings for the cards
-                cardOpener = '<article class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">' +
+                cardOpener = '<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">' +
                              '<h4 class="text-white card-header bg-black border border-secondary text-center" id="'+ item.id +'" title="' + itemName + '">';
                 cardCloser = '</h4><image class="card-img-bottom bg-black border border-secondary" src="' + path +
-                             '" alt="Promotional Image of ' + itemName + '"/></article>';
+                             '" alt="Promotional Image of ' + itemName + '"/></div>';
 
                 if(itemName.length > 14){ // Truncate the name if it is too long to maintain good visibility
                     nameTrunc = itemName.substring(0,10)+'...';
