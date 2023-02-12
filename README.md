@@ -1,5 +1,5 @@
-# MovieSearch
- A simple list that pulls information about movies from TMDB (The Movie Database)
+# TMDB-TrendingSearch
+ A mobile-friendly movie database searcher that retrieves daily or weekly trends for movies, tv shows and people involved in the industry.
 
 ## Table of contents
 
@@ -16,6 +16,9 @@
 
 ## Overview
 
+A small cog in a larger project; TMDB-TrendingSearch is the first entry in a series of pages that explore the functionality of The Movie DB API and provide me with the opportunity to learn more about various frameworks for frontend development. 
+
+TMDB-TrendingSearch allows users to search for the weekly or daily trends in movies, tv shows and various people involved in the motion picture industry. 
 ### The challenge
 
 Users should be able to:
