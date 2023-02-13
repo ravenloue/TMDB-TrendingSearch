@@ -42,7 +42,7 @@ trendingSearchBtn.addEventListener('click', evt => {
                 '<h4 class="text-white card-header bg-black border border-secondary text-center" id="' + item.id + '" title="' + itemName + '">';
             cardCloser = '</h4><image class="card-img-bottom bg-black border border-secondary" src="' + path +
                 '" alt="Promotional Image of ' + itemName + '"/></div>';
-            clickStart = '<a onclick="alert(' + itemName + ')">';
+            clickStart = '<a onclick="alert(\'' + itemName + '\')">';
             clickEnd = '</a>';
             if (itemName.length > 14) { // Truncate the name if it is too long to maintain good visibility
                 nameTrunc = itemName.substring(0, 10) + '...';
