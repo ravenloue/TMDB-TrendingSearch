@@ -5,7 +5,7 @@ const apiURLstart = 'https://api.themoviedb.org/3/';
  * which will be used to pull images from the movie database
  */
 const configUrl = apiURLstart + 'configuration?api_key=' + apiKey;
-var secBaseUrl, posterSize, posterPath;
+var secBaseUrl, posterSize, posterPath, itemIDs;
 fetch(configUrl)
     .then(response => response.json())
     .then(results => {
@@ -50,6 +50,15 @@ trendingSearchBtn.addEventListener('click', evt => {
                 resultsArea.innerHTML += `${cardOpener}` + itemName + `${cardCloser}`;
             }
         });
-    }); // End of Fetch calls
+    }) // End of Card Generating Sequence
+        .then(() => {
+        // Limiting this query selector to only h4 tags with id's means it will only look for the search cards
+        itemIDs = document.querySelectorAll('h4[id]');
+        itemIDs.forEach(item => {
+            item.addEventListener('click', evt => {
+                console.log(item.id);
+            });
+        });
+    });
 }); // end of Trending Search functionality
 export {};
