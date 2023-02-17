@@ -24,7 +24,8 @@ const trendingSearchBtn = document.getElementById("trendingSearchBtn") as HTMLBu
 const trendType = document.getElementById("trendType") as HTMLSelectElement;
 const trendTime = document.getElementById("trendTime") as HTMLSelectElement;
 const resultsArea = document.getElementById('results') as HTMLDivElement;
-
+const popoverContainer = document.getElementById('popoverContainer') as HTMLDivElement;
+const popoverCard = document.getElementById('popoverCard') as HTMLDivElement;
 
 trendingSearchBtn.addEventListener('click', evt => {
 
@@ -57,12 +58,10 @@ trendingSearchBtn.addEventListener('click', evt => {
                              '" title="' + itemName + '">';
                 cardCloser = '</h4><image class="card-img-bottom bg-black border border-secondary" src="' + path +
                              '" alt="Promotional Image of ' + itemName + '"/></div>';
-                clickStart = '<a onclick="alert(\''+itemName+'\')">';
-                clickEnd   = '</a>'
 
                 if(itemName.length > 14){ // Truncate the name if it is too long to maintain good visibility
                     nameTrunc = itemName.substring(0,10)+'...';
-                    resultsArea.innerHTML +=`${cardOpener}${clickStart}`+nameTrunc+`${clickEnd}${cardCloser}`;
+                    resultsArea.innerHTML +=`${cardOpener}`+nameTrunc+`${cardCloser}`;
                 }else {
                     resultsArea.innerHTML +=`${cardOpener}`+itemName+`${cardCloser}`;
                 }
@@ -85,8 +84,39 @@ trendingSearchBtn.addEventListener('click', evt => {
                         itemType = "tv";
                     }
                     searchID = item.id.slice(0, item.id.length - (itemType.length + 1));
-                    console.log(searchID);
-  
+                    
+                    let cardSearchURL = apiURLstart + itemType +"/"+ searchID +"?api_key="+ apiKey;
+                    
+                    // Callback for clicked card popup
+                    fetch(cardSearchURL)
+                        .then( response => response.json() )
+                        .then( (results) => {
+
+                                let idNum = results.id;
+                                let cardName = (results.name === undefined) ? results.title : results.name;
+                                // the biography was too long to use and I couldn't get the auto-scroll to work properly
+                                let cardinfo = (results.biography === undefined) ? results.overview : 
+                                    ('<b>Known for: </b>'+ results.known_for_department +
+                                     '<br><b>Birthday:</b> ' + results.birthday + 
+                                     '<br><b>Born:</b> ' + results.place_of_birth +
+                                     '<br><b>For more information visit their profile at:</b> <a href="https://www.themoviedb.org/person/'+idNum+'">The Movie Database</a>');
+
+                                let closeButton = '<button id="closeContainer" class="btn btn-outline-light" type="submit" style="position:relative; left: 95%">X</button>'
+                                let cardHeader = '<h3 class="card-header">'+ closeButton + cardName + '</h3>';
+                                let cardBody = '<p class="card-body bg-dark">'+ cardinfo +'</p>';
+
+                                popoverCard.innerHTML = `${cardHeader}${cardBody}`;
+                                popoverContainer.style.setProperty('display','inline');
+
+                                const closeContainer = document.getElementById('closeContainer') as HTMLButtonElement;
+                                closeContainer.addEventListener('click', evt =>{
+                                    evt.preventDefault();
+                                    popoverContainer.style.setProperty('display',"none");
+                                })
+                                
+
+                        })
+                        
                 })
             })
         })
