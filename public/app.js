@@ -5,9 +5,7 @@ const apiURLstart = 'https://api.themoviedb.org/3/';
  * which will be used to pull images from the movie database
  */
 const configUrl = apiURLstart + 'configuration?api_key=' + apiKey;
-var secBaseUrl;
-var posterSize;
-var posterPath;
+var secBaseUrl, posterSize, posterPath;
 fetch(configUrl)
     .then(response => response.json())
     .then(results => {

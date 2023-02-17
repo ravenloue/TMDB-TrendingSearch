@@ -9,14 +9,11 @@ const apiURLstart = 'https://api.themoviedb.org/3/';
  * which will be used to pull images from the movie database
  */
 const configUrl = apiURLstart+'configuration?api_key='+apiKey;
-var secBaseUrl: string;
-var posterSize: string;
-var posterPath: string;
+var secBaseUrl: string, posterSize: string, posterPath: string;
 
 fetch(configUrl)
     .then( response => response.json() )
-    .then( results =>{
-        
+    .then( results => {       
         secBaseUrl  = results.images.secure_base_url;
         posterSize  = results.images.poster_sizes[2];
     })
@@ -58,7 +55,7 @@ trendingSearchBtn.addEventListener('click', evt => {
                              '<h4 class="text-white card-header bg-black border border-secondary text-center" id="'+ item.id +'" title="' + itemName + '">';
                 cardCloser = '</h4><image class="card-img-bottom bg-black border border-secondary" src="' + path +
                              '" alt="Promotional Image of ' + itemName + '"/></div>';
-                clickStart = '<a onclick="alert('+itemName+')">';
+                clickStart = '<a onclick="alert(\''+itemName+'\')">';
                 clickEnd   = '</a>'
 
                 if(itemName.length > 14){ // Truncate the name if it is too long to maintain good visibility
