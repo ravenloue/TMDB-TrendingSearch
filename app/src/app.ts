@@ -99,7 +99,7 @@ trendingSearchBtn.addEventListener('click', evt => {
                                     ('<b>Known for: </b>'+ results.known_for_department +
                                      '<br><b>Birthday:</b> ' + results.birthday + 
                                      '<br><b>Born:</b> ' + results.place_of_birth +
-                                     '<br><b>For more information visit their profile at:</b> <a href="https://www.themoviedb.org/person/'+idNum+'">The Movie Database</a>');
+                                     '<br><b>For more information visit their profile at:</b> <a target="_blank" href="https://www.themoviedb.org/person/'+idNum+'">The Movie Database</a>');
 
                                 let closeButton = '<button id="closeContainer" class="btn btn-outline-light" type="submit" style="position:relative; left: 95%">X</button>'
                                 let cardHeader = '<h3 class="card-header">'+ closeButton + cardName + '</h3>';
