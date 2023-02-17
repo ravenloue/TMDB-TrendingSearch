@@ -37,7 +37,8 @@ trendingSearchBtn.addEventListener('click', evt => {
             path = (item.media_type === "person") ? posterPath + item.profile_path : posterPath + item.poster_path;
             // Generating Strings for the cards
             cardOpener = '<div class="container-sm card bg-transparent border border-0 col-sm-2 my-3" style="width: 14.9375rem;">' +
-                '<h4 class="text-white card-header bg-black border border-secondary text-center" id="' + item.id + '" title="' + itemName + '">';
+                '<h4 class="text-white card-header bg-black border border-secondary text-center" id="' + item.id + "_" + item.media_type +
+                '" title="' + itemName + '">';
             cardCloser = '</h4><image class="card-img-bottom bg-black border border-secondary" src="' + path +
                 '" alt="Promotional Image of ' + itemName + '"/></div>';
             clickStart = '<a onclick="alert(\'' + itemName + '\')">';
@@ -56,7 +57,18 @@ trendingSearchBtn.addEventListener('click', evt => {
         itemIDs = document.querySelectorAll('h4[id]');
         itemIDs.forEach(item => {
             item.addEventListener('click', evt => {
-                console.log(item.id);
+                let itemType, searchID;
+                if (item.id.endsWith("person")) {
+                    itemType = "person";
+                }
+                else if (item.id.endsWith("movie")) {
+                    itemType = "movie";
+                }
+                else {
+                    itemType = "tv";
+                }
+                searchID = item.id.slice(0, item.id.length - (itemType.length + 1));
+                console.log(searchID);
             });
         });
     });
