@@ -8,5 +8,6 @@ export interface Person {
     known_for_department: string;
     profile_path: string;
     known_for?: SearchResultItem[];
+    biography: string;
 
 }

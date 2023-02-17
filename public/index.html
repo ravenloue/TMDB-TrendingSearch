@@ -39,7 +39,7 @@
                         <input class="form-check-input border border-dark" type="checkbox" value="1" id="includeAdult" required/>
                     </div>
                     -->
-                    <button class="btn btn-outline-light" id="trendingSearchBtn"type="submit">Search</button>
+                    <button class="btn btn-outline-light" id="trendingSearchBtn" type="submit">Search</button>
                 </form>
             </div>
         </nav>
@@ -53,6 +53,11 @@
                          height="12" style="margin-top: -.325rem;"/></a></p>
                 <div id="results" class="d-flex flex-wrap">
                     
+                </div>
+                <div id="popoverContainer" class="container-fluid" style="background: rgba(0,0,0,.75);display: none; min-height: 100%; z-index: 2; position: fixed; top: 0rem; left: 0;">
+                    <div id="popoverCard" class="container-sm card bg-black border border-white text-white opacity-100" style="top: 10rem; left: auto;">
+
+                    </div>
                 </div>
             </section>
         </main>
