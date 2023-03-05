@@ -9,5 +9,6 @@ export interface Person {
     profile_path: string;
     known_for?: SearchResultItem[];
     biography: string;
-
+    birthday: string;
+    place_of_birth: string;
 }
