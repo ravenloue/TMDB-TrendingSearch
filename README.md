@@ -67,9 +67,9 @@ First, I reviewed the video from Andy's Tech Tutorials (link in resources) and c
 ### Continued development
 
 I've still got a few things that I want to do with the page before I move on to another project. Namely:
-- Make the size of the title cards more uniform
-  - Potentially truncate the longer titles and have a on-hover effect to reveal the full name
-- On-click pop-in cards that reveal more information about the particular object
+-[x] ~~~Make the size of the title cards more uniform~~~
+  -[x] ~~~Potentially truncate the longer titles and have a on-hover effect to reveal the full name~~~
+-[x] ~~~On-click pop-in cards that reveal more information about the particular object~~~
 - Animated Hamburger menu to link to other relevant projects (and my evenutal portfolio)
 
 ### Useful resources
